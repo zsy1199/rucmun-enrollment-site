@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报名数据统计 - 主页面</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>报名数据统计系统</h1>
+            <p class="update-time" id="updateTime">加载中...</p>
+        </header>
+
+        <div class="committees-grid">
+            {% for committee in committees %}
+            <div class="committee-card" onclick="window.location.href='/committee/{{ committee|urlencode }}'">
+                <h3>{{ committee }}</h3>
+                <div class="stats-preview" id="preview-{{ loop.index0 }}">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="notes-section">
+            <h2>备注</h2>
+            <div class="notes-content" id="notesContent">
+                <p>数据统计说明：</p>
+                <ul>
+                    <li>卡片颜色根据报名热度（占用率）自动调整</li>
+                    <li>蓝色表示报名比例较低，橙色表示报名比例较高</li>
+                    <li>点击任意会场卡片可查看详细统计信息</li>
+                    <li>数据每30秒自动刷新</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>
+
