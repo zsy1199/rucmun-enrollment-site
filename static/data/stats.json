@@ -1,5 +1,5 @@
 {
-  "update_time": "2026-01-29 19:21:39",
+  "update_time": "2026-01-29 19:32:40",
   "committees": {
     "联合国大会第四委员会": {
       "first_choice": 0,
@@ -29,7 +29,7 @@
       "capacity": 35,
       "ratio": 0.0
     },
-    "历史谈判委员": {
+    "历史谈判委员会": {
       "first_choice": 0,
       "second_choice": 0,
       "third_choice": 0,
