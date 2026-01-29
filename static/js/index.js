@@ -1,5 +1,18 @@
 // 主页面JavaScript
 
+// 会场名称到图片文件名的映射
+const COMMITTEE_IMAGE_MAP = {
+    "联合国大会第四委员会": "联合国大会第四委员会.jpg",
+    "联合国系统联动体系": "联合国系统联动.jpg",
+    "第二十九届联合国气候变化大会及其临时工作委员会": "第二十九届联合国气候变化大会临时工作委员会.jpg",
+    "国际足联球员负荷专责工作组非正式会议": "国际足联球员负荷专责工作组非正式会议.jpg",
+    "历史谈判委员会": "历史谈判委员会.jpg",
+    "历史联动委员会": "历史联动委员会.jpg",
+    "UNSC": "UNSC.jpg",
+    "UNHSP": "UNHSP.jpg",
+    "主新闻中心": null // 没有图片
+};
+
 // 根据比例计算热力图颜色（0-1之间，可能超过1）
 function getHeatmapColor(ratio) {
     // 将比例限制在0-1.5之间进行颜色映射
@@ -78,7 +91,25 @@ async function loadStats() {
                 
                 // 根据比例设置热力图颜色（蓝色到橙色）
                 const heatmapColor = getHeatmapColor(ratio);
-                cardEl.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
+                
+                // 获取对应的背景图片
+                const imageFile = COMMITTEE_IMAGE_MAP[committee];
+                if (imageFile) {
+                    // 设置背景图片和颜色叠加
+                    const imageUrl = `/images/committees/${encodeURIComponent(imageFile)}`;
+                    const rgbValues = heatmapColor.match(/\d+/g);
+                    const darkerRgbValues = adjustBrightness(heatmapColor, -20).match(/\d+/g);
+                    // 使用多层背景：颜色渐变叠加在图片上
+                    cardEl.style.background = `
+                        linear-gradient(135deg, rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.7) 0%, rgba(${darkerRgbValues[0]}, ${darkerRgbValues[1]}, ${darkerRgbValues[2]}, 0.7) 100%),
+                        url('${imageUrl}')
+                    `;
+                    cardEl.style.backgroundSize = 'cover';
+                    cardEl.style.backgroundPosition = 'center';
+                } else {
+                    // 如果没有图片，只使用颜色渐变
+                    cardEl.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
+                }
                 // 统一使用白色文字
                 cardEl.style.color = 'white';
             } else {
