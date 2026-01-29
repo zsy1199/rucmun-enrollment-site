@@ -61,6 +61,12 @@ async function loadStats() {
             const previewEl = document.getElementById(`preview-${index}`);
             const data = stats[committee];
 
+            // 更新卡片链接
+            const encodedName = encodeURIComponent(committee);
+            cardEl.onclick = () => {
+                window.location.href = `/committee.html?name=${encodedName}`;
+            };
+
             if (data) {
                 const capacity = data.capacity || 0;
                 const ratio = data.ratio || 0;

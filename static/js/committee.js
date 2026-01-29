@@ -41,8 +41,57 @@ function adjustBrightness(rgb, percent) {
 
 // 会场介绍内容：从静态 JSON 读取（static/data/intros.json）
 
+// 从 URL 参数获取会场名称
+function getCommitteeNameFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    if (name) {
+        return decodeURIComponent(name);
+    }
+    // 如果没有 query 参数，尝试从 hash 读取
+    if (window.location.hash) {
+        return decodeURIComponent(window.location.hash.substring(1));
+    }
+    return null;
+}
+
+// 会场列表（需要与 data_processor.py 中的 COMMITTEES 保持一致）
+const COMMITTEES = [
+    "联合国大会第四委员会",
+    "联合国系统联动体系",
+    "第二十九届联合国气候变化大会及其临时工作委员会",
+    "国际足联球员负荷专责工作组非正式会议",
+    "历史谈判委员",
+    "历史联动委员会",
+    "UNSC",
+    "UNHSP",
+    "主新闻中心"
+];
+
+// 获取当前会场名称
+const committeeName = getCommitteeNameFromURL();
+
 // 加载特定会场的统计数据（从静态 JSON 读取）
 async function loadCommitteeStats() {
+    if (!committeeName) {
+        console.error('未指定会场名称');
+        document.getElementById('committeeTitle').textContent = '会场不存在';
+        document.getElementById('updateTime').textContent = '请从主页选择会场';
+        return;
+    }
+
+    // 更新页面标题
+    document.getElementById('committeeTitle').textContent = committeeName;
+
+    // 生成其他会场链接
+    const committeesList = document.getElementById('committeesList');
+    if (committeesList) {
+        committeesList.innerHTML = COMMITTEES
+            .filter(c => c !== committeeName)
+            .map(c => `<a href="/committee.html?name=${encodeURIComponent(c)}" class="committee-link">${c}</a>`)
+            .join('');
+    }
+
     try {
         const response = await fetch('/data/stats.json', { cache: 'no-store' });
         if (!response.ok) {
@@ -95,7 +144,7 @@ function updateIntroduction() {
         }
         
         // 确保committeeName已定义
-        if (typeof committeeName === 'undefined') {
+        if (!committeeName) {
             console.error('committeeName未定义');
             introContent.textContent = '该会场的详细介绍信息待补充。';
             return;
