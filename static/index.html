@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报名数据统计 - 主页面</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>报名数据统计系统</h1>
+            <p class="update-time" id="updateTime">加载中...</p>
+        </header>
+
+        <div class="committees-grid">
+            <div class="committee-card" onclick="window.location.href='/committee/%E8%81%94%E5%90%88%E5%9B%BD%E5%A4%A7%E4%BC%9A%E7%AC%AC%E5%9B%9B%E5%A7%94%E5%91%98%E4%BC%9A'">
+                <h3>联合国大会第四委员会</h3>
+                <div class="stats-preview" id="preview-0">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/%E8%81%94%E5%90%88%E5%9B%BD%E7%B3%BB%E7%BB%9F%E8%81%94%E5%8A%A8%E4%BD%93%E7%B3%BB'">
+                <h3>联合国系统联动体系</h3>
+                <div class="stats-preview" id="preview-1">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B9%9D%E5%B1%8A%E8%81%94%E5%90%88%E5%9B%BD%E6%B0%94%E5%80%99%E5%8F%98%E5%8C%96%E5%A4%A7%E4%BC%9A%E5%8F%8A%E5%85%B6%E4%B8%B4%E6%97%B6%E5%B7%A5%E4%BD%9C%E5%A7%94%E5%91%98%E4%BC%9A'">
+                <h3>第二十九届联合国气候变化大会及其临时工作委员会</h3>
+                <div class="stats-preview" id="preview-2">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/%E5%9B%BD%E9%99%85%E8%B6%B3%E8%81%94%E7%90%83%E5%91%98%E8%B4%9F%E8%8D%B7%E4%B8%93%E8%B4%A3%E5%B7%A5%E4%BD%9C%E7%BB%84%E9%9D%9E%E6%AD%A3%E5%BC%8F%E4%BC%9A%E8%AE%AE'">
+                <h3>国际足联球员负荷专责工作组非正式会议</h3>
+                <div class="stats-preview" id="preview-3">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/%E5%8E%86%E5%8F%B2%E8%B0%88%E5%88%A4%E5%A7%94%E5%91%98'">
+                <h3>历史谈判委员</h3>
+                <div class="stats-preview" id="preview-4">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/%E5%8E%86%E5%8F%B2%E8%81%94%E5%8A%A8%E5%A7%94%E5%91%98%E4%BC%9A'">
+                <h3>历史联动委员会</h3>
+                <div class="stats-preview" id="preview-5">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/UNSC'">
+                <h3>UNSC</h3>
+                <div class="stats-preview" id="preview-6">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/UNHSP'">
+                <h3>UNHSP</h3>
+                <div class="stats-preview" id="preview-7">
+                    <p>加载中...</p>
+                </div>
+            </div>
+            <div class="committee-card" onclick="window.location.href='/committee/%E4%B8%BB%E6%96%B0%E9%97%BB%E4%B8%AD%E5%BF%83'">
+                <h3>主新闻中心</h3>
+                <div class="stats-preview" id="preview-8">
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <h2>备注</h2>
+            <div class="notes-content" id="notesContent">
+                <p>数据统计说明：</p>
+                <ul>
+                    <li>卡片颜色根据报名热度（占用率）自动调整</li>
+                    <li>深色表示报名比例较高，颜色越浅表示报名比例越低</li>
+                    <li>点击任意会场卡片可查看详细统计信息</li>
+                    <li>当前为静态部署示例，数据接口待迁移至云端</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/index.js"></script>
+</body>
+</html>
+
+
