@@ -44,7 +44,7 @@ function adjustBrightness(rgb, percent) {
 // 加载特定会场的统计数据（从静态 JSON 读取）
 async function loadCommitteeStats() {
     try {
-        const response = await fetch('/static/data/stats.json', { cache: 'no-store' });
+        const response = await fetch('/data/stats.json', { cache: 'no-store' });
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
@@ -101,7 +101,7 @@ function updateIntroduction() {
             return;
         }
 
-        fetch('/static/data/intros.json', { cache: 'no-store' })
+        fetch('/data/intros.json', { cache: 'no-store' })
             .then((res) => res.json())
             .then((json) => {
                 if (!json) {

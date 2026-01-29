@@ -32,7 +32,9 @@ function getHeatmapColor(ratio) {
 // 加载统计数据（从静态 JSON 读取）
 async function loadStats() {
     try {
-        const response = await fetch('/static/data/stats.json', { cache: 'no-store' });
+        // 在 Cloudflare Pages 上，构建输出目录为 static，
+        // 其中的内容会被当作站点根目录提供，因此这里用 /data/...
+        const response = await fetch('/data/stats.json', { cache: 'no-store' });
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
