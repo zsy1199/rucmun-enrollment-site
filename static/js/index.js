@@ -29,55 +29,58 @@ function getHeatmapColor(ratio) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-// 加载统计数据
+// 加载统计数据（从静态 JSON 读取）
 async function loadStats() {
     try {
-        const response = await fetch('/api/stats');
-        const result = await response.json();
-        
-        if (result.success) {
-            const stats = result.data;
-            const updateTime = result.update_time;
-            
-            // 更新更新时间
-            document.getElementById('updateTime').textContent = `数据更新时间: ${updateTime}`;
-            
-            // 更新每个会场的预览
-            const committeeCards = document.querySelectorAll('.committee-card');
-            const committees = Array.from(committeeCards).map((card, index) => {
-                return card.querySelector('h3').textContent;
-            });
-            
-            committees.forEach((committee, index) => {
-                const cardEl = committeeCards[index];
-                const previewEl = document.getElementById(`preview-${index}`);
-                if (stats[committee]) {
-                    const data = stats[committee];
-                    const capacity = data.capacity || 0;
-                    const ratio = data.ratio || 0;
-                    
-                    // 显示容量（不展示任何志愿相关信息）
-                    previewEl.innerHTML = `
-                        <p><strong>会场容量: ${capacity}</strong></p>
-                    `;
-                    
-                    // 根据比例设置热力图颜色（蓝色到橙色）
-                    const heatmapColor = getHeatmapColor(ratio);
-                    cardEl.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
-                    // 统一使用白色文字
-                    cardEl.style.color = 'white';
-                } else {
-                    previewEl.innerHTML = '<p>暂无数据</p>';
-                    cardEl.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
-                    cardEl.style.color = 'white';
-                }
-            });
-        } else {
-            console.error('加载数据失败:', result.error);
-            document.getElementById('updateTime').textContent = '数据加载失败';
+        const response = await fetch('/static/data/stats.json', { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
         }
+        const result = await response.json();
+
+        const stats = result.committees || {};
+        const updateTime = result.update_time || '';
+        
+        // 更新更新时间
+        if (updateTime) {
+            document.getElementById('updateTime').textContent = `数据更新时间: ${updateTime}`;
+        } else {
+            document.getElementById('updateTime').textContent = '数据更新时间: 未知';
+        }
+        
+        // 更新每个会场的预览
+        const committeeCards = document.querySelectorAll('.committee-card');
+        const committees = Array.from(committeeCards).map((card) => {
+            return card.querySelector('h3').textContent;
+        });
+        
+        committees.forEach((committee, index) => {
+            const cardEl = committeeCards[index];
+            const previewEl = document.getElementById(`preview-${index}`);
+            const data = stats[committee];
+
+            if (data) {
+                const capacity = data.capacity || 0;
+                const ratio = data.ratio || 0;
+                
+                // 显示容量（不展示任何志愿相关信息）
+                previewEl.innerHTML = `
+                    <p><strong>会场容量: ${capacity}</strong></p>
+                `;
+                
+                // 根据比例设置热力图颜色（蓝色到橙色）
+                const heatmapColor = getHeatmapColor(ratio);
+                cardEl.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
+                // 统一使用白色文字
+                cardEl.style.color = 'white';
+            } else {
+                previewEl.innerHTML = '<p>暂无数据</p>';
+                cardEl.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
+                cardEl.style.color = 'white';
+            }
+        });
     } catch (error) {
-        console.error('请求失败:', error);
+        console.error('加载静态数据失败:', error);
         document.getElementById('updateTime').textContent = '数据加载失败';
     }
 }

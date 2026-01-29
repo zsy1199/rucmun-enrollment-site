@@ -39,42 +39,46 @@ function adjustBrightness(rgb, percent) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-// 会场介绍内容：改为后端读取txt，通过API返回，避免引号/换行导致JS语法错误
+// 会场介绍内容：从静态 JSON 读取（static/data/intros.json）
 
-// 加载特定会场的统计数据
+// 加载特定会场的统计数据（从静态 JSON 读取）
 async function loadCommitteeStats() {
     try {
-        const encodedName = encodeURIComponent(committeeName);
-        const response = await fetch(`/api/committee/${encodedName}`);
+        const response = await fetch('/static/data/stats.json', { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
         const result = await response.json();
-        
-        if (result.success) {
-            const data = result.data;
-            const updateTime = result.update_time;
-            
-            // 更新更新时间
+
+        const allStats = result.committees || {};
+        const updateTime = result.update_time || '';
+        const data = allStats[committeeName];
+
+        if (updateTime) {
             document.getElementById('updateTime').textContent = `数据更新时间: ${updateTime}`;
-            
+        } else {
+            document.getElementById('updateTime').textContent = '数据更新时间: 未知';
+        }
+
+        if (data) {
             // 更新容量信息
-            const capacity = data.capacity;
+            const capacity = data.capacity || 0;
             const ratio = data.ratio || 0;
             document.getElementById('capacity').textContent = capacity;
-            
+
             // 根据比例设置热力图颜色
             const capacityCard = document.getElementById('capacityCard');
             const heatmapColor = getHeatmapColor(ratio);
             capacityCard.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
-            
-            // 更新会场介绍
-            updateIntroduction();
         } else {
-            console.error('加载数据失败:', result.error);
-            document.getElementById('updateTime').textContent = '数据加载失败';
-            // 即使API失败，也尝试显示介绍
-            updateIntroduction();
+            console.warn(`未找到会场 ${committeeName} 的统计数据`);
+            document.getElementById('capacity').textContent = '-';
         }
+
+        // 更新会场介绍（无论数据是否存在）
+        updateIntroduction();
     } catch (error) {
-        console.error('请求失败:', error);
+        console.error('加载静态统计数据失败:', error);
         document.getElementById('updateTime').textContent = '数据加载失败';
         // 即使请求失败，也尝试显示介绍
         updateIntroduction();
@@ -96,16 +100,21 @@ function updateIntroduction() {
             introContent.textContent = '该会场的详细介绍信息待补充。';
             return;
         }
-        
-        const encodedName = encodeURIComponent(committeeName);
-        fetch(`/api/intro/${encodedName}`)
+
+        fetch('/static/data/intros.json', { cache: 'no-store' })
             .then((res) => res.json())
             .then((json) => {
-                if (!json || !json.success || !json.content) {
+                if (!json) {
                     introContent.textContent = '该会场的详细介绍信息待补充。';
                     return;
                 }
-                const raw = String(json.content).replace(/\r\n/g, '\n');
+                const content = json[committeeName];
+                if (!content) {
+                    console.warn(`未找到会场 "${committeeName}" 的介绍`);
+                    introContent.textContent = '该会场的详细介绍信息待补充。';
+                    return;
+                }
+                const raw = String(content).replace(/\r\n/g, '\n');
 
                 // 安全转义（防止txt中包含HTML被执行）
                 const escapeHtml = (s) =>

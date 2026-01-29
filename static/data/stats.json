@@ -1,0 +1,68 @@
+{
+  "update_time": "2026-01-29 18:30:37",
+  "committees": {
+    "联合国大会第四委员会": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 45,
+      "ratio": 0.0
+    },
+    "联合国系统联动体系": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 80,
+      "ratio": 0.0
+    },
+    "第二十九届联合国气候变化大会及其临时工作委员会": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 27,
+      "ratio": 0.0
+    },
+    "国际足联球员负荷专责工作组非正式会议": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 35,
+      "ratio": 0.0
+    },
+    "历史谈判委员": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 28,
+      "ratio": 0.0
+    },
+    "历史联动委员会": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 80,
+      "ratio": 0.0
+    },
+    "UNSC": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 25,
+      "ratio": 0.0
+    },
+    "UNHSP": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 40,
+      "ratio": 0.0
+    },
+    "主新闻中心": {
+      "first_choice": 0,
+      "second_choice": 0,
+      "third_choice": 0,
+      "capacity": 30,
+      "ratio": 0.0
+    }
+  }
+}
