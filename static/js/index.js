@@ -8,9 +8,9 @@ const COMMITTEE_IMAGE_MAP = {
     "国际足联球员负荷专责工作组非正式会议": "国际足联球员负荷专责工作组非正式会议.jpg",
     "历史谈判委员会": "历史谈判委员会.jpg",
     "历史联动委员会": "历史联动委员会.jpg",
-    "联合国安全理事会": "UNSC.jpg",
-    "联合国人类住区规划署": "UNHSP.jpg",
-    "主新闻中心": null // 没有图片
+    "United Nations Security Council": "UNSC.jpg",
+    "United Nations Human Settlements Programme": "UNHSP.jpg",
+    "主新闻中心": "主新闻中心.png"
 };
 
 // 根据比例计算热力图颜色（0-1之间，可能超过1）

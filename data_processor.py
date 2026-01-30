@@ -36,8 +36,8 @@ COMMITTEE_CAPACITIES = {
 
 # 仅用于页面显示：内部名 -> 显示名（Excel 不改时仍用 UNSC/UNHSP 统计）
 COMMITTEE_DISPLAY_NAMES = {
-    "UNSC": "联合国安全理事会",
-    "UNHSP": "联合国人类住区规划署",
+    "UNSC": "United Nations Security Council",
+    "UNHSP": "United Nations Human Settlements Programme",
 }
 
 def read_excel_files(excel_dir: str = ".") -> pd.DataFrame:

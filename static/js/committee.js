@@ -55,7 +55,7 @@ function getCommitteeNameFromURL() {
     return null;
 }
 
-// 会场列表（需要与 data_processor.py 中的 COMMITTEES 保持一致）
+// 会场列表（显示名，与 data_processor COMMITTEE_DISPLAY_NAMES 及静态数据 key 一致）
 const COMMITTEES = [
     "联合国大会第四委员会",
     "联合国系统联动体系",
@@ -63,10 +63,23 @@ const COMMITTEES = [
     "国际足联球员负荷专责工作组非正式会议",
     "历史谈判委员会",
     "历史联动委员会",
-    "联合国安全理事会",
-    "联合国人类住区规划署",
+    "United Nations Security Council",
+    "United Nations Human Settlements Programme",
     "主新闻中心"
 ];
+
+// 会场名称到 figure 背景图（与 index.js COMMITTEE_IMAGE_MAP 一致，用于分页会场容量模块）
+const COMMITTEE_IMAGE_MAP = {
+    "联合国大会第四委员会": "联合国大会第四委员会.jpg",
+    "联合国系统联动体系": "联合国系统联动.jpg",
+    "第二十九届联合国气候变化大会及其临时工作委员会": "第二十九届联合国气候变化大会临时工作委员会.jpg",
+    "国际足联球员负荷专责工作组非正式会议": "国际足联球员负荷专责工作组非正式会议.jpg",
+    "历史谈判委员会": "历史谈判委员会.jpg",
+    "历史联动委员会": "历史联动委员会.jpg",
+    "United Nations Security Council": "UNSC.jpg",
+    "United Nations Human Settlements Programme": "UNHSP.jpg",
+    "主新闻中心": "主新闻中心.png"
+};
 
 // 获取当前会场名称
 const committeeName = getCommitteeNameFromURL();
@@ -115,10 +128,27 @@ async function loadCommitteeStats() {
             const ratio = data.ratio || 0;
             document.getElementById('capacity').textContent = capacity;
 
-            // 根据比例设置热力图颜色
+            // 会场容量模块使用 figure 对应背景图 + 热力图渐变叠加
             const capacityCard = document.getElementById('capacityCard');
             const heatmapColor = getHeatmapColor(ratio);
-            capacityCard.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
+            const imageFile = COMMITTEE_IMAGE_MAP[committeeName];
+            if (imageFile) {
+                const imageUrl = `/images/committees/${encodeURIComponent(imageFile)}`;
+                const rgbValues = heatmapColor.match(/\d+/g);
+                const darkerRgbValues = adjustBrightness(heatmapColor, -20).match(/\d+/g);
+                capacityCard.style.background = `
+                    linear-gradient(135deg, rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.7) 0%, rgba(${darkerRgbValues[0]}, ${darkerRgbValues[1]}, ${darkerRgbValues[2]}, 0.7) 100%),
+                    url('${imageUrl}')
+                `;
+                capacityCard.style.backgroundSize = 'cover';
+                capacityCard.style.backgroundPosition = 'center';
+                capacityCard.style.backgroundRepeat = 'no-repeat';
+            } else {
+                capacityCard.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
+                capacityCard.style.backgroundSize = '';
+                capacityCard.style.backgroundPosition = '';
+                capacityCard.style.backgroundRepeat = '';
+            }
         } else {
             console.warn(`未找到会场 ${committeeName} 的统计数据`);
             document.getElementById('capacity').textContent = '-';
@@ -174,18 +204,23 @@ function updateIntroduction() {
 
                 const escaped = escapeHtml(raw);
 
-                // 加粗字段名（中文 + 英文常见字段）
+                // 加粗字段名（中文 + 英文常见字段，含主新闻中心等会场）
                 const labels = [
                     '委员会',
+                    '委员会名称',
                     '议题',
                     '会场容量',
                     '工作语言',
+                    '会场规模',
+                    '代表制度',
                     '议事规则',
+                    '驻场规则',
                     '主席团负责人',
                     '会场介绍',
                     'Committee',
                     'Topic',
                     'Total number of delegates',
+                    'Total number of seats',
                     'Language',
                     'Rules of Procedure',
                     'Dais Head',

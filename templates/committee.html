@@ -6,7 +6,7 @@
     <title>{{ committee_name }} - 报名数据统计</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="committee-page">
     <div class="container">
         <header>
             <h1>{{ committee_name }}</h1>
@@ -32,8 +32,9 @@
             <h3>其他会场</h3>
             <div class="committees-list">
                 {% for committee in committees %}
-                    {% if committee != committee_name %}
-                    <a href="/committee/{{ committee|urlencode }}" class="committee-link">{{ committee }}</a>
+                {% set display_name = display_names.get(committee, committee) %}
+                    {% if display_name != committee_name %}
+                    <a href="/committee/{{ display_name|urlencode }}" class="committee-link">{{ display_name }}</a>
                     {% endif %}
                 {% endfor %}
             </div>

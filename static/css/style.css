@@ -5,7 +5,8 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    /* 中文宋体，英文 Times New Roman */
+    font-family: "Times New Roman", "SimSun", 宋体, serif;
     /* 主新闻中心背景图 */
     background: url('../images/Background.png') center center / cover no-repeat fixed;
     min-height: 100vh;
@@ -34,6 +35,11 @@ header h1 {
     color: #e5243b;
     margin-bottom: 10px;
     font-weight: 700;
+}
+
+/* 分页面大标题会场名称改为黑色 */
+body.committee-page header h1 {
+    color: #000;
 }
 
 .update-time {
