@@ -181,17 +181,22 @@ body.committee-page header h1 {
 @media (max-width: 768px) {
     .legend-bar {
         flex-direction: column;
+        align-items: stretch;
         gap: 10px;
         padding: 15px;
     }
     
     .legend-gradient {
+        flex: none;
         width: 100%;
-        height: 25px;
+        min-width: 0;
+        height: 28px;
+        min-height: 28px;
     }
     
     .legend-label {
         font-size: 0.85em;
+        text-align: center;
     }
 }
 
@@ -525,10 +530,23 @@ body.committee-page header h1 {
         max-height: 100px;
     }
 
-    /* 图例 */
+    /* 图例条：移动端纵向排列，渐变条固定高度不拉伸 */
     .legend-bar {
         margin-top: 24px;
-        padding: 12px;
+        padding: 14px 12px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .legend-gradient {
+        flex: none;
+        width: 100%;
+        height: 28px;
+        min-height: 28px;
+    }
+    .legend-label {
+        font-size: 0.85em;
+        text-align: center;
     }
 
     /* 分页：会场容量卡片单列 */
