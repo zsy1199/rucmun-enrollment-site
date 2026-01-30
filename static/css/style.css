@@ -142,6 +142,7 @@ body.committee-page header h1 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     box-sizing: border-box;
+    visibility: visible;
 }
 
 .legend-label {
@@ -150,6 +151,7 @@ body.committee-page header h1 {
     font-weight: 500;
     white-space: nowrap;
     flex-shrink: 0;
+    visibility: visible;
 }
 
 .legend-label.left {
@@ -162,7 +164,7 @@ body.committee-page header h1 {
 
 .legend-gradient {
     flex: 1;
-    min-width: 0;
+    min-width: 50px;
     height: 30px;
     border-radius: 15px;
     background: linear-gradient(
@@ -175,40 +177,54 @@ body.committee-page header h1 {
     );
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     display: block;
+    visibility: visible;
 }
 
-/* 响应式设计：小屏幕时调整布局 */
+/* 响应式设计：小屏幕时调整图例条布局 */
 @media (max-width: 768px) {
     .legend-bar {
         display: flex !important;
+        visibility: visible !important;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
+        justify-content: center;
         gap: 10px;
         padding: 15px;
+        margin-top: 20px;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .legend-gradient {
         display: block !important;
+        visibility: visible !important;
         flex: none;
-        width: 100% !important;
-        min-width: 100%;
-        height: 28px !important;
-        min-height: 28px;
-        border-radius: 14px;
-        background: linear-gradient(
-            to right,
-            #3b82f6 0%,
-            #10b981 25%,
-            #eab308 50%,
-            #f97316 75%,
-            #ef4444 100%
-        ) !important;
+        width: calc(100% - 20px);
+        max-width: 100%;
+        height: 30px;
+        min-height: 30px;
+        border-radius: 15px;
+        background-image: linear-gradient(to right, #3b82f6 0%, #10b981 25%, #eab308 50%, #f97316 75%, #ef4444 100%);
+        background-color: #3b82f6;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
     .legend-label {
-        display: block;
-        font-size: 0.85em;
+        display: block !important;
+        visibility: visible !important;
+        font-size: 0.9em;
         text-align: center;
+        color: #333;
+    }
+    
+    .legend-label.left {
+        color: #2563eb;
+        order: -1;
+    }
+    
+    .legend-label.right {
+        color: #dc2626;
+        order: 1;
     }
 }
 
