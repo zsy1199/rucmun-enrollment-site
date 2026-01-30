@@ -1,5 +1,5 @@
 {
-  "update_time": "2026-01-29 19:32:40",
+  "update_time": "2026-01-30 09:57:50",
   "committees": {
     "联合国大会第四委员会": {
       "first_choice": 0,
@@ -43,14 +43,14 @@
       "capacity": 80,
       "ratio": 0.0
     },
-    "UNSC": {
+    "联合国安全理事会": {
       "first_choice": 0,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 25,
       "ratio": 0.0
     },
-    "UNHSP": {
+    "联合国人类住区规划署": {
       "first_choice": 0,
       "second_choice": 0,
       "third_choice": 0,

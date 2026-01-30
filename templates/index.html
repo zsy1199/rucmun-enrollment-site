@@ -15,8 +15,9 @@
 
         <div class="committees-grid">
             {% for committee in committees %}
-            <div class="committee-card" onclick="window.location.href='/committee/{{ committee|urlencode }}'">
-                <h3>{{ committee }}</h3>
+            {% set display_name = display_names.get(committee, committee) %}
+            <div class="committee-card" onclick="window.location.href='/committee/{{ display_name|urlencode }}'">
+                <h3>{{ display_name }}</h3>
                 <div class="stats-preview" id="preview-{{ loop.index0 }}">
                     <p>加载中...</p>
                 </div>

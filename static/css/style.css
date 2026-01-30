@@ -6,8 +6,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
-    /* 整体色调：自上而下 深红色 → 白色 渐变 */
-    background: linear-gradient(180deg, #b91c1c 0%, #ffffff 100%);
+    /* 主新闻中心背景图 */
+    background: url('../images/Background.png') center center / cover no-repeat fixed;
     min-height: 100vh;
     padding: 20px;
     color: #333;
@@ -71,6 +71,7 @@ header h1 {
     transition: all 0.3s ease;
     border: 2px solid transparent;
     color: white;
+    text-align: center;
 }
 
 .committee-card:hover {
@@ -84,11 +85,13 @@ header h1 {
     margin-bottom: 15px;
     font-size: 1.2em;
     font-weight: 600;
+    text-align: center;
 }
 
 .stats-preview {
     color: white;
     font-size: 0.9em;
+    text-align: center;
 }
 
 .stats-preview p {
@@ -283,13 +286,13 @@ header h1 {
 }
 
 .committee-intro h2 {
-    color: #e5243b;
+    color: #961919;
     margin-bottom: 20px;
     text-align: center;
 }
 
 .intro-content {
-    color: #555;
+    color: #961919;
     line-height: 1.8;
     font-size: 1.05em;
     white-space: pre-wrap; /* 保留换行和段首Tab缩进 */
@@ -299,6 +302,7 @@ header h1 {
 .intro-content p {
     margin: 0;
     text-align: justify;
+    color: #961919;
 }
 
 .navigation {

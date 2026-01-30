@@ -16,6 +16,7 @@ from pathlib import Path
 from data_processor import (
     COMMITTEES,
     COMMITTEE_CAPACITIES,
+    COMMITTEE_DISPLAY_NAMES,
     process_data,
     get_capacity_ratio,
 )
@@ -60,7 +61,9 @@ def build_stats() -> None:
     for committee in COMMITTEES:
         base = stats.get(committee, {"第一志愿": 0, "第二志愿": 0, "第三志愿": 0})
         ratio = get_capacity_ratio(stats, committee)
-        output["committees"][committee] = {
+        # 静态页用显示名作为 key（UNSC/UNHSP -> 联合国安全理事会/联合国人类住区规划署）
+        key = COMMITTEE_DISPLAY_NAMES.get(committee, committee)
+        output["committees"][key] = {
             "first_choice": int(base.get("第一志愿", 0) or 0),
             "second_choice": int(base.get("第二志愿", 0) or 0),
             "third_choice": int(base.get("第三志愿", 0) or 0),
@@ -86,6 +89,7 @@ def build_intros() -> None:
     """
     print("==> 生成会场介绍 intros.json ...")
 
+    # 内部名 -> 文件名（与 app.py 一致）；写入 intros 时用显示名作为 key
     intro_files = {
         "联合国大会第四委员会": "联合国大会第四委员会.txt",
         "联合国系统联动体系": "联合国系统联动.txt",
@@ -177,7 +181,8 @@ def build_intros() -> None:
             continue
         with path.open("r", encoding="utf-8") as f:
             raw = f.read()
-        intros[committee] = normalize_indentation(raw)
+        key = COMMITTEE_DISPLAY_NAMES.get(committee, committee)
+        intros[key] = normalize_indentation(raw)
 
     intros_path = DATA_DIR / "intros.json"
     with intros_path.open("w", encoding="utf-8") as f:

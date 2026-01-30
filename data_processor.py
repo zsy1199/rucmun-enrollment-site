@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 from typing import Dict, List, Tuple
 
-# 会场列表
+# 会场列表（Excel 中仍使用 UNSC、UNHSP）
 COMMITTEES = [
     "联合国大会第四委员会",
     "联合国系统联动体系",
@@ -32,6 +32,12 @@ COMMITTEE_CAPACITIES = {
     "UNSC": 25,
     "UNHSP": 40,
     "主新闻中心": 30
+}
+
+# 仅用于页面显示：内部名 -> 显示名（Excel 不改时仍用 UNSC/UNHSP 统计）
+COMMITTEE_DISPLAY_NAMES = {
+    "UNSC": "联合国安全理事会",
+    "UNHSP": "联合国人类住区规划署",
 }
 
 def read_excel_files(excel_dir: str = ".") -> pd.DataFrame:

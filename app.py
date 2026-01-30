@@ -5,7 +5,7 @@ Flask Web应用：提供数据统计网页
 """
 from flask import Flask, render_template, jsonify, Response
 from flask_cors import CORS
-from data_processor import process_data, COMMITTEES, get_total_count, COMMITTEE_CAPACITIES, get_capacity_ratio
+from data_processor import process_data, COMMITTEES, get_total_count, COMMITTEE_CAPACITIES, get_capacity_ratio, COMMITTEE_DISPLAY_NAMES
 import os
 
 app = Flask(__name__)
@@ -18,25 +18,32 @@ app.static_folder = 'static'
 @app.route('/')
 def index():
     """主页面：显示所有会场的概览"""
-    return render_template('index.html', committees=COMMITTEES)
+    return render_template('index.html', committees=COMMITTEES, display_names=COMMITTEE_DISPLAY_NAMES)
+
+def _resolve_committee_name(name):
+    """URL/显示名为「联合国安全理事会」等时，解析为内部名 UNSC，便于查 Excel 与 intro 文件。"""
+    from urllib.parse import unquote
+    name = unquote(name)
+    reverse = {v: k for k, v in COMMITTEE_DISPLAY_NAMES.items()}
+    return reverse.get(name, name)
+
 
 @app.route('/committee/<committee_name>')
 def committee_page(committee_name):
     """各个会场的详细页面"""
-    # URL解码
     from urllib.parse import unquote
     committee_name = unquote(committee_name)
-    return render_template('committee.html', committee_name=committee_name, committees=COMMITTEES)
+    return render_template('committee.html', committee_name=committee_name, committees=COMMITTEES, display_names=COMMITTEE_DISPLAY_NAMES)
 
 @app.route('/api/stats')
 def get_stats():
-    """API：获取所有会场的统计数据"""
+    """API：获取所有会场的统计数据（key 使用显示名，与静态页一致）"""
     try:
         stats, update_time = process_data()
-        # 添加容量和比例信息
         enhanced_data = {}
         for committee in COMMITTEES:
-            enhanced_data[committee] = {
+            key = COMMITTEE_DISPLAY_NAMES.get(committee, committee)
+            enhanced_data[key] = {
                 **stats[committee],
                 'capacity': COMMITTEE_CAPACITIES[committee],
                 'ratio': get_capacity_ratio(stats, committee)
@@ -56,25 +63,25 @@ def get_stats():
 def get_committee_stats(committee_name):
     """API：获取特定会场的统计数据"""
     try:
-        from urllib.parse import unquote
-        committee_name = unquote(committee_name)
+        internal_name = _resolve_committee_name(committee_name)
         stats, update_time = process_data()
         
-        if committee_name not in stats:
+        if internal_name not in stats:
             return jsonify({
                 'success': False,
                 'error': '会场不存在'
             }), 404
         
-        committee_data = stats[committee_name]
-        total = get_total_count(stats, committee_name)
-        capacity = COMMITTEE_CAPACITIES.get(committee_name, 0)
-        ratio = get_capacity_ratio(stats, committee_name)
+        committee_data = stats[internal_name]
+        total = get_total_count(stats, internal_name)
+        capacity = COMMITTEE_CAPACITIES.get(internal_name, 0)
+        ratio = get_capacity_ratio(stats, internal_name)
         
+        display_name = COMMITTEE_DISPLAY_NAMES.get(internal_name, committee_name)
         return jsonify({
             'success': True,
             'data': {
-                'committee': committee_name,
+                'committee': display_name,
                 'first_choice': committee_data['第一志愿'],
                 'second_choice': committee_data['第二志愿'],
                 'third_choice': committee_data['第三志愿'],
@@ -94,8 +101,7 @@ def get_committee_stats(committee_name):
 def get_committee_intro(committee_name):
     """API：获取特定会场的介绍文本（从项目根目录的txt读取）"""
     try:
-        from urllib.parse import unquote
-        committee_name = unquote(committee_name)
+        internal_name = _resolve_committee_name(committee_name)
 
         intro_files = {
             "联合国大会第四委员会": "联合国大会第四委员会.txt",
@@ -109,7 +115,7 @@ def get_committee_intro(committee_name):
             "主新闻中心": "主新闻中心.txt",
         }
 
-        filename = intro_files.get(committee_name)
+        filename = intro_files.get(internal_name)
         if not filename:
             return jsonify({"success": False, "error": "会场不存在"}), 404
 
@@ -196,7 +202,8 @@ def get_committee_intro(committee_name):
         if not content or not content.strip():
             return jsonify({"success": False, "error": "会场介绍文件为空"}), 404
 
-        return jsonify({"success": True, "committee": committee_name, "content": content})
+        display_name = COMMITTEE_DISPLAY_NAMES.get(internal_name, committee_name)
+        return jsonify({"success": True, "committee": display_name, "content": content})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 

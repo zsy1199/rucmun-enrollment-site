@@ -8,8 +8,8 @@ const COMMITTEE_IMAGE_MAP = {
     "国际足联球员负荷专责工作组非正式会议": "国际足联球员负荷专责工作组非正式会议.jpg",
     "历史谈判委员会": "历史谈判委员会.jpg",
     "历史联动委员会": "历史联动委员会.jpg",
-    "UNSC": "UNSC.jpg",
-    "UNHSP": "UNHSP.jpg",
+    "联合国安全理事会": "UNSC.jpg",
+    "联合国人类住区规划署": "UNHSP.jpg",
     "主新闻中心": null // 没有图片
 };
 
@@ -99,16 +99,20 @@ async function loadStats() {
                     const imageUrl = `/images/committees/${encodeURIComponent(imageFile)}`;
                     const rgbValues = heatmapColor.match(/\d+/g);
                     const darkerRgbValues = adjustBrightness(heatmapColor, -20).match(/\d+/g);
-                    // 使用多层背景：颜色渐变叠加在图片上
+                    // 使用多层背景：颜色渐变叠加在图片上（注意顺序：上面的层先写）
                     cardEl.style.background = `
                         linear-gradient(135deg, rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.7) 0%, rgba(${darkerRgbValues[0]}, ${darkerRgbValues[1]}, ${darkerRgbValues[2]}, 0.7) 100%),
                         url('${imageUrl}')
                     `;
                     cardEl.style.backgroundSize = 'cover';
                     cardEl.style.backgroundPosition = 'center';
+                    cardEl.style.backgroundRepeat = 'no-repeat';
                 } else {
                     // 如果没有图片，只使用颜色渐变
                     cardEl.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
+                    cardEl.style.backgroundSize = '';
+                    cardEl.style.backgroundPosition = '';
+                    cardEl.style.backgroundRepeat = '';
                 }
                 // 统一使用白色文字
                 cardEl.style.color = 'white';

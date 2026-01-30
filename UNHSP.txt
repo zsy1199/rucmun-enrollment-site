@@ -1,7 +1,9 @@
-Committee: United Nations Human Settlements ProgrammeTopic: Risk Management for Human Settlements under ExtremeHeat Conditions
+Committee: United Nations Human Settlements Programme
+Topic: Risk Management for Human Settlements under ExtremeHeat Conditions
 Total number of seats: 30-40
 Language: English
-Rules of Procedure: The Rules of Procedure for the Model UnitedNations Conference of Renmin University of ChinaDais Head:外交学院曹怡宁
+Rules of Procedure: The Rules of Procedure for the Model UnitedNations Conference of Renmin University of China
+Dais Head:外交学院曹怡宁
 Introduction:
 	According to the latest data released by the United Nationsin 2025, by 2050 nearly 45% of the global urban population isexpected to be exposed to extreme heat conditions. Heatwaveshave already become the deadliest climate-related hazard,causing more fatalities annually than hurricanes, tornadoes, andlightning combined. Extreme heat is no longer merely ameteorological phenomenon; it has evolved into a systemicurban risk affecting public health, housing security, energy
 systems, water supply, labor productivity, and social stability.
