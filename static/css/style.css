@@ -196,11 +196,11 @@ body.committee-page header h1 {
     text-align: center;
 }
 
-/* 备注框左下角、右上角装饰 */
+/* 备注框左下角、右上角装饰（长宽为原 3 倍：56×3=168px） */
 .notes-corner {
     position: absolute;
-    width: 56px;
-    height: 56px;
+    width: 168px;
+    height: 168px;
     object-fit: contain;
     pointer-events: none;
 }
@@ -213,18 +213,18 @@ body.committee-page header h1 {
     left: 8px;
 }
 
-/* 备注下方 butt 图 */
+/* 备注下方 butt 图：与备注边框等宽 */
 .notes-footer {
     margin-top: 24px;
-    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 .notes-footer-img {
+    width: 100%;
     max-width: 100%;
-    width: auto;
-    max-height: 140px;
     height: auto;
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
+    object-fit: contain;
 }
 
 .notes-content {
@@ -331,10 +331,30 @@ body.committee-page header h1 {
 }
 
 .committee-intro {
+    position: relative;
     margin: 40px 0;
     padding: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     background: #f8f9fa;
     border-radius: 15px;
+}
+
+/* 会场介绍左下角、右上角装饰（与主页面备注处同大：168px） */
+.intro-corner {
+    position: absolute;
+    width: 168px;
+    height: 168px;
+    object-fit: contain;
+    pointer-events: none;
+}
+.intro-corner-tr {
+    top: 8px;
+    right: 8px;
+}
+.intro-corner-bl {
+    bottom: 8px;
+    left: 8px;
 }
 
 .committee-intro h2 {
