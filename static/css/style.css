@@ -320,6 +320,7 @@ body.committee-page header h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-end;
     gap: 12px;
 }
 
@@ -330,10 +331,29 @@ body.committee-page header h1 {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
+/* 1.2图片：缩小到0.6倍（原48%的0.6倍=28.8%） */
+.notes-img-1-2 {
+    width: 28.8%;
+    max-width: 28.8%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* 1.1图片：不纵向拉伸，高度与1.2保持一致 */
+.notes-img-1-1 {
+    width: auto;
+    max-width: 48%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
 .notes-img-center {
     display: block;
     margin: 10px auto 0;
-    max-width: 88%;
+    max-width: 17.6%;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
