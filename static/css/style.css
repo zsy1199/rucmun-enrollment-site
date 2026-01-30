@@ -281,8 +281,17 @@ body.committee-page header h1 {
     line-height: 1.8;
 }
 
-.notes-content p {
-    margin-bottom: 15px;
+/* 备注分条内容 */
+.notes-item {
+    margin-bottom: 18px;
+}
+
+.notes-item:last-child {
+    margin-bottom: 0;
+}
+
+.notes-item p {
+    margin-bottom: 6px;
     font-weight: 500;
     color: #333;
 }
@@ -296,6 +305,48 @@ body.committee-page header h1 {
 .notes-content li {
     margin-bottom: 10px;
     color: #666;
+}
+
+/* 备注中的链接（如网盘、推文） */
+.notes-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    word-break: break-all;
+}
+
+/* 备注插图布局 */
+.notes-images-row {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.notes-img-half {
+    max-width: 48%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.notes-img-center {
+    display: block;
+    margin: 10px auto 0;
+    max-width: 88%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* 宽图（5、6）：略小于备注边框宽度 */
+.notes-img-wide {
+    display: block;
+    margin: 10px auto 0;
+    max-width: 94%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
 }
 
 .committee-stats {
