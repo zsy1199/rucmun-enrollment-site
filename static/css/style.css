@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 body {
     /* 中文宋体，英文 Times New Roman */
     font-family: "Times New Roman", "SimSun", 宋体, serif;
@@ -12,6 +22,7 @@ body {
     min-height: 100vh;
     padding: 20px;
     color: #333;
+    overflow-x: hidden;
 }
 
 .container {
@@ -22,6 +33,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     padding: 40px;
+    overflow-x: hidden;
 }
 
 /* 主页面白色区域左上角 Logo */
@@ -103,6 +115,10 @@ body.committee-page header h1 {
     font-size: 1.2em;
     font-weight: 600;
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.35;
 }
 
 .stats-preview {
@@ -257,7 +273,7 @@ body.committee-page header h1 {
 }
 
 .committee-stats .stat-card {
-    min-width: 300px;
+    min-width: 140px;
     max-width: 400px;
 }
 
@@ -413,21 +429,188 @@ body.committee-page header h1 {
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
 }
 
+/* ========== 移动端适配 ========== */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+        /* 移动端背景不 fixed，避免 iOS 渲染问题 */
+        background-attachment: scroll;
+    }
+
     .container {
-        padding: 20px;
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    /* Logo 缩小，避免压住标题 */
+    .container-logo {
+        width: 48px;
+        top: 12px;
+        left: 12px;
+    }
+
+    header {
+        margin-bottom: 24px;
+        padding-bottom: 12px;
     }
 
     header h1 {
-        font-size: 1.8em;
+        font-size: 1.35em;
+        line-height: 1.3;
+        padding-left: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .update-time {
+        font-size: 0.8em;
     }
 
     .committees-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
     }
 
+    .committee-card {
+        padding: 16px 12px;
+        min-height: 80px;
+    }
+
+    .committee-card h3 {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
+
+    .stats-preview {
+        font-size: 0.85em;
+    }
+
+    /* 备注区：装饰图缩小 */
+    .notes-section {
+        margin-top: 20px;
+        padding: 20px 16px;
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+
+    .notes-corner {
+        width: 72px;
+        height: 72px;
+    }
+
+    .notes-corner-tr {
+        top: 4px;
+        right: 4px;
+    }
+
+    .notes-section h2 {
+        font-size: 1.2em;
+        margin-bottom: 12px;
+    }
+
+    .notes-content {
+        font-size: 0.9em;
+    }
+
+    .notes-content ul {
+        padding-left: 22px;
+    }
+
+    .notes-footer {
+        margin-top: 16px;
+    }
+
+    .notes-footer-img {
+        max-height: 100px;
+    }
+
+    /* 图例 */
+    .legend-bar {
+        margin-top: 24px;
+        padding: 12px;
+    }
+
+    /* 分页：会场容量卡片单列 */
     .committee-stats {
-        grid-template-columns: repeat(2, 1fr);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .committee-stats .stat-card {
+        min-width: 0;
+        max-width: none;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+
+    .stat-number {
+        font-size: 2em;
+    }
+
+    /* 会场介绍区：装饰缩小 */
+    .committee-intro {
+        margin: 24px 0;
+        padding: 20px 16px;
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+
+    .intro-corner {
+        width: 72px;
+        height: 72px;
+    }
+
+    .intro-corner-tr {
+        top: 4px;
+        right: 4px;
+    }
+
+    .committee-intro h2 {
+        font-size: 1.2em;
+        margin-bottom: 12px;
+    }
+
+    .intro-content {
+        font-size: 0.9em;
+        line-height: 1.7;
+    }
+
+    .navigation {
+        margin-top: 24px;
+        padding: 16px;
+    }
+
+    .committee-link {
+        padding: 8px 14px;
+        font-size: 0.9em;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* 超小屏（如 iPhone SE） */
+@media (max-width: 380px) {
+    .container-logo {
+        width: 40px;
+        top: 10px;
+        left: 10px;
+    }
+
+    header h1 {
+        font-size: 1.2em;
+    }
+
+    .notes-corner,
+    .intro-corner {
+        width: 56px;
+        height: 56px;
     }
 }
 
