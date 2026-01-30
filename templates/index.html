@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="{{ url_for('static', filename='images/RUCMUN.png') }}" alt="RUCMUN" class="container-logo">
         <header>
             <h1>报名数据统计系统</h1>
             <p class="update-time" id="updateTime">加载中...</p>
@@ -26,6 +27,8 @@
         </div>
 
         <div class="notes-section">
+            <img src="{{ url_for('static', filename='images/装饰2.jpg') }}" alt="" class="notes-corner notes-corner-tr" aria-hidden="true">
+            <img src="{{ url_for('static', filename='images/装饰1.jpg') }}" alt="" class="notes-corner notes-corner-bl" aria-hidden="true">
             <h2>备注</h2>
             <div class="notes-content" id="notesContent">
                 <p>数据统计说明：</p>
@@ -36,6 +39,9 @@
                     <li>数据每30秒自动刷新</li>
                 </ul>
             </div>
+        </div>
+        <div class="notes-footer">
+            <img src="{{ url_for('static', filename='images/butt.jpg') }}" alt="" class="notes-footer-img">
         </div>
     </div>
 
