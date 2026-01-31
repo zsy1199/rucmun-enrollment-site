@@ -307,11 +307,22 @@ body.committee-page header h1 {
     color: #666;
 }
 
-/* 备注中的链接（如网盘、推文） */
+/* 备注中的链接（如网盘、推文），移动端自动换行 */
 .notes-content a {
     color: #2563eb;
     text-decoration: underline;
     word-break: break-all;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.notes-content p,
+.notes-item p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
 }
 
 /* 备注插图布局 */
@@ -615,6 +626,15 @@ body.committee-page header h1 {
 
     .notes-content {
         font-size: 0.9em;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    .notes-content a {
+        word-break: break-all;
+        overflow-wrap: anywhere;
+        white-space: normal;
+        max-width: 100%;
     }
 
     .notes-content ul {
