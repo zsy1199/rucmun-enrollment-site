@@ -1,5 +1,5 @@
 {
-  "update_time": "2026-01-30 10:17:13",
+  "update_time": "2026-01-30 12:00:00",
   "committees": {
     "联合国大会第四委员会": {
       "first_choice": 0,
@@ -16,11 +16,11 @@
       "ratio": 0.0
     },
     "第二十九届联合国气候变化大会及其临时工作委员会": {
-      "first_choice": 0,
+      "first_choice": 3,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 27,
-      "ratio": 0.0
+      "ratio": 0.1111111111111111
     },
     "国际足联球员负荷专责工作组非正式会议": {
       "first_choice": 0,
@@ -37,11 +37,11 @@
       "ratio": 0.0
     },
     "历史联动委员会": {
-      "first_choice": 0,
+      "first_choice": 1,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 80,
-      "ratio": 0.0
+      "ratio": 0.0125
     },
     "United Nations Security Council": {
       "first_choice": 0,
@@ -58,11 +58,11 @@
       "ratio": 0.0
     },
     "主新闻中心": {
-      "first_choice": 0,
+      "first_choice": 1,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 30,
-      "ratio": 0.0
+      "ratio": 0.03333333333333333
     }
   }
 }
