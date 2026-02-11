@@ -15,28 +15,26 @@ const COMMITTEE_IMAGE_MAP = {
 
 // 根据比例计算热力图颜色（0-1之间，可能超过1）
 function getHeatmapColor(ratio) {
-    // 将比例限制在0-1.5之间进行颜色映射
-    const normalizedRatio = Math.min(ratio, 1.5) / 1.5;
+    // 放大低比例段的映射，使变色更明显：ratio * 3 封顶 1，约 0.33 即满橙
+    const normalizedRatio = Math.min(1, ratio * 3);
     
-    // 从蓝色（低）到橙色（高）的渐变
-    // 0.0 -> 蓝色 (59, 130, 246) - 浅蓝
-    // 0.5 -> 青色 (34, 211, 238) - 青蓝
-    // 1.0 -> 橙色 (249, 115, 22) - 橙色
+    // 从深蓝（低）到橙红（高），对比更强
+    // 0.0 -> 深蓝 (30, 64, 180)
+    // 0.5 -> 青 (20, 180, 200)
+    // 1.0 -> 橙红 (220, 70, 20)
     
     let r, g, b;
     
     if (normalizedRatio < 0.5) {
-        // 蓝色到青蓝色
         const t = normalizedRatio * 2;
-        r = Math.round(59 + (34 - 59) * t);
-        g = Math.round(130 + (211 - 130) * t);
-        b = Math.round(246 + (238 - 246) * t);
+        r = Math.round(30 + (20 - 30) * t);
+        g = Math.round(64 + (180 - 64) * t);
+        b = Math.round(180 + (200 - 180) * t);
     } else {
-        // 青蓝色到橙色
         const t = (normalizedRatio - 0.5) * 2;
-        r = Math.round(34 + (249 - 34) * t);
-        g = Math.round(211 + (115 - 211) * t);
-        b = Math.round(238 + (22 - 238) * t);
+        r = Math.round(20 + (220 - 20) * t);
+        g = Math.round(180 + (70 - 180) * t);
+        b = Math.round(200 + (20 - 200) * t);
     }
     
     return `rgb(${r}, ${g}, ${b})`;
