@@ -114,10 +114,22 @@ async function loadStats() {
                 }
                 // 统一使用白色文字
                 cardEl.style.color = 'white';
+                // 颜色条：按第一志愿/容量比例显示
+                const barFill = cardEl.querySelector('.committee-ratio-bar-fill');
+                if (barFill) {
+                    const fillPercent = Math.min(1, ratio * 3) * 100;
+                    barFill.style.width = fillPercent + '%';
+                    barFill.style.background = heatmapColor;
+                }
             } else {
                 previewEl.innerHTML = '<p>暂无数据</p>';
                 cardEl.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)';
                 cardEl.style.color = 'white';
+                const barFill = cardEl.querySelector('.committee-ratio-bar-fill');
+                if (barFill) {
+                    barFill.style.width = '0%';
+                    barFill.style.background = '#94a3b8';
+                }
             }
         });
     } catch (error) {
