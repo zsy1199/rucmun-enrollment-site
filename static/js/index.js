@@ -120,7 +120,7 @@ async function loadStats() {
                 if (barFill) {
                     const fillPercent = Math.min(100, ratio * 3 * 100);
                     barFill.style.width = fillPercent + '%';
-                    barFill.style.background = ''; /* 使用 CSS 中定义的渐变 */
+                    barFill.style.background = 'linear-gradient(to right, #3b82f6 0%, #10b981 25%, #eab308 50%, #f97316 75%, #ef4444 100%)';
                 }
             } else {
                 previewEl.innerHTML = '<p>暂无数据</p>';
