@@ -92,6 +92,13 @@ body.committee-page header h1 {
     margin-bottom: 40px;
 }
 
+/* 单个会场：卡片 + 下方进度条整体作为一个网格单元 */
+.committee-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .committee-card {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     border-radius: 15px;
