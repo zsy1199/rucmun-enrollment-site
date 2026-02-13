@@ -114,12 +114,12 @@ async function loadStats() {
                 }
                 // 统一使用白色文字
                 cardEl.style.color = 'white';
-                // 颜色条：按第一志愿/容量比例显示
+                // 进度条：与图例条同款渐变，填充长度表示报名占比（ratio*3 封顶 100%）
                 const barFill = cardEl.querySelector('.committee-ratio-bar-fill');
                 if (barFill) {
-                    const fillPercent = Math.min(1, ratio * 3) * 100;
+                    const fillPercent = Math.min(100, ratio * 3 * 100);
                     barFill.style.width = fillPercent + '%';
-                    barFill.style.background = heatmapColor;
+                    barFill.style.background = ''; /* 使用 CSS 中定义的渐变 */
                 }
             } else {
                 previewEl.innerHTML = '<p>暂无数据</p>';
