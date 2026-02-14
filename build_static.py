@@ -51,6 +51,21 @@ def build_stats() -> None:
     }
     """
     print("==> 生成统计数据 stats.json ...")
+
+    # 如果仓库中没有实际报名表（只有模板），且已经存在手工维护的 stats.json，
+    # 则直接保留现有数据，不用空数据覆盖，方便在 Cloudflare 上展示静态配置的报名情况。
+    stats_path = DATA_DIR / "stats.json"
+    excel_files = [
+        f
+        for f in os.listdir(ROOT)
+        if f.endswith((".xlsx", ".xls"))
+        and not f.startswith("~")
+        and f != "模板.xlsx"
+    ]
+    if not excel_files and stats_path.exists():
+        print("  未检测到实际报名表，沿用现有的 static/data/stats.json")
+        return
+
     stats, update_time = process_data(str(ROOT))
 
     output = {
@@ -71,7 +86,6 @@ def build_stats() -> None:
             "ratio": float(ratio),
         }
 
-    stats_path = DATA_DIR / "stats.json"
     with stats_path.open("w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 

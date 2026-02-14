@@ -159,6 +159,7 @@ body.committee-page header h1 {
 .committee-ratio-bar-fill {
     height: 100%;
     width: 0;
+    display: block;
     border-radius: 5px;
     min-width: 0;
     /* 与图例条相同的渐变：蓝→绿→黄→橙→红 */

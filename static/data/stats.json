@@ -1,5 +1,5 @@
 {
-  "update_time": "2026-01-30 12:00:00",
+  "update_time": "2026-02-14 08:35:44",
   "committees": {
     "联合国大会第四委员会": {
       "first_choice": 0,
@@ -9,11 +9,11 @@
       "ratio": 0.0
     },
     "联合国系统联动体系": {
-      "first_choice": 0,
+      "first_choice": 7,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 80,
-      "ratio": 0.0
+      "ratio": 0.0875
     },
     "第二十九届联合国气候变化大会及其临时工作委员会": {
       "first_choice": 6,
@@ -23,11 +23,11 @@
       "ratio": 0.2222222222
     },
     "国际足联球员负荷专责工作组非正式会议": {
-      "first_choice": 0,
+      "first_choice": 2,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 35,
-      "ratio": 0.0
+      "ratio": 0.0571428571
     },
     "历史谈判委员会": {
       "first_choice": 0,
@@ -37,32 +37,32 @@
       "ratio": 0.0
     },
     "历史联动委员会": {
-      "first_choice": 1,
+      "first_choice": 3,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 80,
-      "ratio": 0.0125
+      "ratio": 0.0375
     },
     "United Nations Security Council": {
-      "first_choice": 0,
+      "first_choice": 3,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 25,
-      "ratio": 0.0
+      "ratio": 0.12
     },
     "United Nations Human Settlements Programme": {
-      "first_choice": 0,
+      "first_choice": 4,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 40,
-      "ratio": 0.0
+      "ratio": 0.1
     },
     "主新闻中心": {
-      "first_choice": 1,
+      "first_choice": 4,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 30,
-      "ratio": 0.03333333333333333
+      "ratio": 0.1333333333
     }
   }
 }
