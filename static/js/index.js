@@ -114,13 +114,12 @@ async function loadStats() {
                 }
                 // 统一使用白色文字
                 cardEl.style.color = 'white';
-                // 进度条：与图例条同款渐变，填充长度表示报名占比（ratio*3 封顶 100%）
+                // 进度条：整条与示例条同款渐变，填充长度严格为 报名人数/会场容量，用 clip-path 露出左侧比例
                 const container = cardEl.parentElement;
                 const barFill = container && container.querySelector('.committee-ratio-bar-fill');
                 if (barFill) {
-                    const fillPercent = Math.min(100, ratio * 3 * 100);
-                    barFill.style.width = fillPercent + '%';
-                    barFill.style.background = 'linear-gradient(to right, #3b82f6 0%, #10b981 25%, #eab308 50%, #f97316 75%, #ef4444 100%)';
+                    const fillPercent = Math.min(100, ratio * 100);
+                    barFill.style.clipPath = `inset(0 ${100 - fillPercent}% 0 0)`;
                 }
             } else {
                 previewEl.innerHTML = '<p>暂无数据</p>';
@@ -129,8 +128,7 @@ async function loadStats() {
                 const container = cardEl.parentElement;
                 const barFill = container && container.querySelector('.committee-ratio-bar-fill');
                 if (barFill) {
-                    barFill.style.width = '0%';
-                    barFill.style.background = '#94a3b8';
+                    barFill.style.clipPath = 'inset(0 100% 0 0)';
                 }
             }
         });

@@ -156,13 +156,14 @@ body.committee-page header h1 {
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* 填充层：整条与图例同款渐变，用 clip-path 控制露出长度（报名/容量） */
 .committee-ratio-bar-fill {
     height: 100%;
-    width: 0;
+    width: 100%;
     display: block;
     border-radius: 5px;
-    min-width: 0;
-    /* 与图例条相同的渐变：蓝→绿→黄→橙→红 */
+    box-sizing: border-box;
+    /* 与图例条完全相同的渐变：蓝→绿→黄→橙→红 */
     background: linear-gradient(
         to right,
         #3b82f6 0%,
@@ -171,7 +172,8 @@ body.committee-page header h1 {
         #f97316 75%,
         #ef4444 100%
     );
-    transition: width 0.4s ease;
+    background-size: 100% 100%;
+    transition: clip-path 0.4s ease;
 }
 
 .legend-bar {
