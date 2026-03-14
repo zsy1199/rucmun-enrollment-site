@@ -10,7 +10,7 @@ const COMMITTEE_IMAGE_MAP = {
     "历史联动委员会": "历史联动委员会.jpg",
     "United Nations Security Council": "UNSC.jpg",
     "United Nations Human Settlements Programme": "UNHSP.jpg",
-    "主新闻中心": "主新闻中心.jpg"
+    "主新闻中心": "R-C.jpg"
 };
 
 // 根据比例计算热力图颜色（0-1之间，可能超过1）
