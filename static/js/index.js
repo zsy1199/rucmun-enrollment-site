@@ -89,25 +89,19 @@ async function loadStats() {
                 
                 // 根据比例设置热力图颜色（蓝色到橙色）
                 const heatmapColor = getHeatmapColor(ratio);
-                
-                // 获取对应的背景图片
+
+                // 获取对应的背景图片（主页面卡片不再根据比例改变背景色，只展示图片）
                 const imageFile = COMMITTEE_IMAGE_MAP[committee];
                 if (imageFile) {
-                    // 设置背景图片和颜色叠加
                     const imageUrl = `/images/committees/${encodeURIComponent(imageFile)}`;
-                    const rgbValues = heatmapColor.match(/\d+/g);
-                    const darkerRgbValues = adjustBrightness(heatmapColor, -20).match(/\d+/g);
-                    // 使用多层背景：颜色渐变叠加在图片上（注意顺序：上面的层先写）
-                    cardEl.style.background = `
-                        linear-gradient(135deg, rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.7) 0%, rgba(${darkerRgbValues[0]}, ${darkerRgbValues[1]}, ${darkerRgbValues[2]}, 0.7) 100%),
-                        url('${imageUrl}')
-                    `;
+                    cardEl.style.backgroundImage = `url('${imageUrl}')`;
                     cardEl.style.backgroundSize = 'cover';
                     cardEl.style.backgroundPosition = 'center';
                     cardEl.style.backgroundRepeat = 'no-repeat';
+                    cardEl.style.backgroundColor = '';
                 } else {
-                    // 如果没有图片，只使用颜色渐变
-                    cardEl.style.background = `linear-gradient(135deg, ${heatmapColor} 0%, ${adjustBrightness(heatmapColor, -20)} 100%)`;
+                    // 如果没有图片，使用固定的中性渐变背景，不随比例变化
+                    cardEl.style.background = 'linear-gradient(135deg, #4f628e 0%, #2c3e50 100%)';
                     cardEl.style.backgroundSize = '';
                     cardEl.style.backgroundPosition = '';
                     cardEl.style.backgroundRepeat = '';

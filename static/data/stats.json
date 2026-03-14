@@ -1,68 +1,68 @@
 {
-  "update_time": "2026-03-10 00:00:00",
+  "update_time": "2026-03-14 00:00:00",
   "committees": {
     "联合国大会第四委员会": {
-      "first_choice": 31,
+      "first_choice": 43,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 45,
-      "ratio": 0.6888888889
+      "ratio": 0.9555555556
     },
     "联合国系统联动体系": {
-      "first_choice": 71,
+      "first_choice": 104,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 80,
-      "ratio": 0.8875
+      "ratio": 1.3
     },
     "第二十九届联合国气候变化大会及其临时工作委员会": {
-      "first_choice": 31,
+      "first_choice": 46,
       "second_choice": 0,
       "third_choice": 0,
-      "capacity": 27,
-      "ratio": 1.1481481481
+      "capacity": 54,
+      "ratio": 0.8518518519
     },
     "国际足联球员负荷专责工作组非正式会议": {
-      "first_choice": 17,
+      "first_choice": 28,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 35,
-      "ratio": 0.4857142857
+      "ratio": 0.8
     },
     "历史谈判委员会": {
-      "first_choice": 22,
+      "first_choice": 32,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 28,
-      "ratio": 0.7857142857
+      "ratio": 1.1428571429
     },
     "历史联动委员会": {
-      "first_choice": 26,
+      "first_choice": 36,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 80,
-      "ratio": 0.325
+      "ratio": 0.45
     },
     "United Nations Security Council": {
-      "first_choice": 14,
+      "first_choice": 19,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 25,
-      "ratio": 0.56
+      "ratio": 0.76
     },
     "United Nations Human Settlements Programme": {
-      "first_choice": 15,
+      "first_choice": 25,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 40,
-      "ratio": 0.375
+      "ratio": 0.625
     },
     "主新闻中心": {
-      "first_choice": 23,
+      "first_choice": 32,
       "second_choice": 0,
       "third_choice": 0,
       "capacity": 30,
-      "ratio": 0.7666666667
+      "ratio": 1.0666666667
     }
   }
 }
